@@ -4,8 +4,8 @@ class PlacesController < ApplicationController
   end
 
   def show
-    @places = Place.find_by({"id" => params["id"]})
-    @entries= Entry.where({"places_id" => @places["id"]})
+    @place = Place.find_by({"id" => params["id"]})
+    @entry= Entry.where({"places_id" => @place["id"]})
   end
 end
 
@@ -13,13 +13,13 @@ def new
 end
 
 def create
-  # start with a new Company
-  @places= Place.new
+  # start with a new place
+  @place= Place.new
 
-  # assign user-entered form data to Company's columns
-  @places["name"] = params["name"]
+  # assign user-entered form data to place's columns
+  @place["name"] = params["name"]
 
-  # save Company row
+  # save place row
   @place.save
 
   # redirect user

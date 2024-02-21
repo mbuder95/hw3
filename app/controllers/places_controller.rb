@@ -5,7 +5,7 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find_by({"id" => params["id"]})
-    @entry= Entry.where({"places_id" => @place["id"]})
+    @entries= Entry.where({"place_id" => @place["id"]})
   end
 
   def new

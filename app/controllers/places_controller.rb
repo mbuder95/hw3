@@ -7,21 +7,19 @@ class PlacesController < ApplicationController
     @place = Place.find_by({"id" => params["id"]})
     @entry= Entry.where({"places_id" => @place["id"]})
   end
-end
 
-def new
-end
+  def new
+  end
 
-def create
-  # start with a new place
-  @place= Place.new
-
+  def create
+    @place = Place.new
   # assign user-entered form data to place's columns
-  @place["name"] = params["name"]
+    @place["name"] = params["name"]
 
   # save place row
-  @place.save
+    @place.save
 
   # redirect user
-  redirect_to "/places"
+    redirect_to "/places"
+  end
 end

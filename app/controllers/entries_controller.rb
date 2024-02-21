@@ -1,38 +1,32 @@
 class EntriesController < ApplicationController
 
-#   def new
-#     # render view with new Company form
-#   end
+  def show
+    @entry = Entry.find_by({"id" => params["id"]})
+    @place = Place.find_by({"id" => @entry["place_id"]})
+    # render entry/show view with details about Entry
+  end
 
-#   def create
-#     # start with a new Company
-#     @company = Company.new
-#     # assign user-entered form data to Company's columns
-#     @company["name"] = params["name"]
-#     @company["city"] = params["city"]
-#     @company["state"] = params["state"]
-# @company.save
-#     # save Company row
-#     # redirect user
-#     redirect_to "/companies"
-#   end
+  def new
+    # render view with new Place form
+    @place= Place.find_by({ "id" => params["place_id"] })
+  end
 
-#   # def edit
-#   #   # find a Company
-#   #   # render view with edit Company form
-#   # end
+  def create
+    # start with a new Company
+    @entry = Entry.new
+    # assign user-entered form data to Company's columns
+    @entry["title"] = params["title"]
+    @entry["description"] = params["description"]
+    @entry["date"] = params["date"]
 
-#   # def update
-#   #   # find a Company
-#   #   # assign user-entered form data to Company's columns
-#   #   # save Company row
-#   #   # redirect user
-#   # end
+    # assign relationship between Entry and Place
+    @entry["place_id"] = params["place_id"]
 
-#   # def destroy
-#   #   # find a Company
-#   #   # destroy Company row
-#   #   # redirect user
-#   # end
+    # save Company row
+    @entry.save
+   
+    # redirect user
+    redirect_to "/companies/#{@entry["place_id"]}"
+  end
 
 end

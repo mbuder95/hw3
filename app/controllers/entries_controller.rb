@@ -1,8 +1,12 @@
 class EntriesController < ApplicationController
 
+  def index
+    @entries = Entry.all
+  end
+
   def show
     @entry = Entry.find_by({"id" => params["id"]})
-    @place = Place.find_by({"id" => @entry["place_id"]})
+    @places = Place.find_by({"id" => @entry["place_id"]})
     # render entry/show view with details about Entry
   end
 
@@ -17,7 +21,7 @@ class EntriesController < ApplicationController
     # assign user-entered form data to Company's columns
     @entry["title"] = params["title"]
     @entry["description"] = params["description"]
-    @entry["date"] = params["date"]
+    @entry["posted_on"] = params["posted_on"]
 
     # assign relationship between Entry and Place
     @entry["place_id"] = params["place_id"]
